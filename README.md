@@ -6,4 +6,4 @@ This repository aims to store my R code to undertake quantitative analysis and s
 ## Option Price
 
 * Pricing of European Options with Monte Carlo \
-https://www.r-bloggers.com/2020/12/pricing-of-european-options-with-monte-carlo/ \
+https://www.r-bloggers.com/2020/12/pricing-of-european-options-with-monte-carlo/
