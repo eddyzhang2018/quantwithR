@@ -38,3 +38,24 @@ ES99 <- ESnorm(0.99, mu = mu, sd = sigma)
 # Draw vertical lines at VaR99 and ES99 in red and green
 abline(v = VaR99, col = "red")
 abline(v = ES99, col = "green")
+
+
+### Examining risk factors for international equity portfolio
+
+# Plot the risk-factor data
+plot.zoo(riskfactors)
+
+# Calculate the log-returns, assign to returns, and plot
+returns <- diff(log(riskfactors))[-1, ]
+plot.zoo(returns)
+
+# Use apply() to carry out the Jarque-Bera test for all 5 series
+apply(returns, 2, jarque.test)
+
+# Make a Q-Q plot against normal for the 5th return series and add a reference line
+qqnorm(returns[, 5])
+qqline(returns[, 5])
+
+# Make a picture of the sample acfs for returns and their absolute values
+acf(returns)
+acf(abs(returns))
