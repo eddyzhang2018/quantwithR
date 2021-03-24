@@ -2,7 +2,7 @@
 # Difficulty: Easy
 # Max Score: 30
 
-ipt <- sort(scan("stdin")[-1])
+ipt <- sort(scan("stdin")[-1]) # scan and read the data on Hackerrank
 
 len_ipt <- length(ipt)
 
