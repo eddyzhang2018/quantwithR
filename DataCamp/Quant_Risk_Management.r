@@ -59,3 +59,37 @@ qqline(returns[, 5])
 # Make a picture of the sample acfs for returns and their absolute values
 acf(returns)
 acf(abs(returns))
+
+# Partition plotting area into 3 pieces
+par(mfrow = c(1, 3))
+
+# Plot djx_extremes
+plot(djx_extremes, type = "h")
+
+# Compute the spaces between the times of the extremes
+djx_spaces <- diff(time(djx_extremes))
+
+# Make a histogram of these spaces
+hist(as.numeric(djx_spaces))
+
+# Make a Q-Q plot of djx_spaces against exp_quantiles
+qqplot(exp_quantiles, djx_spaces)
+
+# Carry out the previous 4 steps for iid_extremes
+plot(iid_extremes, type="h")
+iid_spaces <- diff(time(iid_extremes))
+hist(as.numeric(iid_spaces))
+qqplot(exp_quantiles, iid_spaces)
+
+# Make a time series plot of indexes with plot.zoo and a pairwise scatterplot with pairs
+plot.zoo(indexes)
+pairs(as.zoo(indexes))
+
+# Calculate the sample correlation matrix of indexes
+cor(indexes)
+
+# Plot the sample acfs and cross-correlation functions for the returns in indexes
+acf(indexes)
+
+# Plot the sample acfs and cross-correlations functions for the absolute values of indexes
+acf(abs(indexes))
