@@ -93,3 +93,24 @@ acf(indexes)
 
 # Plot the sample acfs and cross-correlations functions for the absolute values of indexes
 acf(abs(indexes))
+
+
+# Plot fx and fx_w
+plot.zoo(fx, type = "h")
+plot.zoo(fx_w, type = "h")
+
+# Make acf plots of fx and the absolute values of fx
+acf(fx)
+acf(abs(fx))
+
+# Apply the Ljung-Box test to the components of fx and their absolute values
+apply(fx, 2, Box.test, lag = 10, type = "Ljung")
+apply(abs(fx), 2, Box.test, lag = 10, type = "Ljung")
+
+# Make acf plots of fx_w and the absolute values of fx_w
+acf(fx_w)
+acf(abs(fx_w))
+
+# Apply the Ljung-Box test to the components of fx_w and their absolute values
+apply(fx_w, 2, Box.test, lag = 10, type = "Ljung")
+apply(abs(fx_w), 2, Box.test, lag = 10, type = "Ljung")
