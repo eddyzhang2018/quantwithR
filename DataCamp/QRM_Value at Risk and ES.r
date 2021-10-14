@@ -47,3 +47,19 @@ qqnorm(hslosses)
 # Plot the sample acf of hslosses and their absolute values
 acf(hslosses)
 acf(abs(hslosses))
+
+# Estimate the 99th sample percentile of the distribution of hslosses
+quantile(hslosses, 0.99)
+
+# Estimate the 99% ES
+mean(hslosses[hslosses >= quantile(hslosses, 0.99)])
+
+# Estimate the mean and standard deviation of hslosses
+mu <- mean(hslosses)
+sigma <- sd(hslosses)
+
+# Compute the 99% quantile of a normal distribution
+qnorm(0.99, mean = mu, sd = sigma)
+
+# Compute the 99% ES of a normal distribution
+ESnorm(0.99, mu = mu, sd = sigma)
