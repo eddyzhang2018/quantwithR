@@ -32,3 +32,18 @@ qqline(returns[, 5])
 # Make a picture of the sample acfs for returns and their absolute values
 acf(returns)
 acf(abs(returns))
+
+# Calculate the loss from a log-return of -0.1 for all risk factors
+lossop(rep(-0.1, 5))
+
+# Apply lossop() to returns and plot hslosses
+hslosses <- lossop(returns)
+plot(hslosses)
+
+# Form a Q-Q plot of hslosses against normal
+qqnorm(hslosses)
+
+
+# Plot the sample acf of hslosses and their absolute values
+acf(hslosses)
+acf(abs(hslosses))
