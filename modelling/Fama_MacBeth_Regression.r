@@ -1,18 +1,10 @@
 # Fama MacBeth Regression
+  # change to use tidyquant
 
-library(tidyverse)
-library(RSQLite)
-library(lubridate)
-library(sandwich)
-library(broom)
 library(tidyquant)
-library(PerformanceAnalytics)
+library(quantmod)
 
-# house keeping
-
-  # for data frame, use "." in name
-  # for row/column in data, use "_" in name
-
+# ASX 20 consitutes
 
 asx.20 <- c("ANZ.AX",
             "ALL.AX",
@@ -33,32 +25,19 @@ asx.20 <- c("ANZ.AX",
             "WES.AX",
             "WBC.AX",
             "WDS.AX",
-            "WOW.AX",
-            "^AXJO")
+            "WOW.AX")
 
 # Grab Financial Data from Yahoo Finance
 
-asx.20.price <- asx.20 %>%
+    # Get Stock Prices for ASX 20 stocks
+asx20.stocks.price <- asx.20 %>%
   tq_get(get = "stock.prices",
          from = "2017-12-29",
          to = "2022-12-31") %>%
-  group_by(symbol)
+  group_by(symbol) %>%
+  filter(symbol != "COL.AX") # COL.AX does not have the same length of data
 
-
-# Data Preparation
-
-  # Key Dates
-
-stock.last.date <- asx.20.price %>%
-                group_by(symbol) %>%
-                summarize(last_date = max(date))
-
-stock.first.date <- asx.20.price %>%
-                    group_by(symbol) %>%
-                    summarize(last_date = min(date))
-
-first.date <- min(stock.first.date$last_date)
-
-last.date <- min(stock.last.date$last_date)
-
-date_5y <- last.date %m-% months(60) 
+   # Get Index Values for ASX 200 index
+asx200.index.price <- tq_get("^AXJO", get = "stock.prices",
+                               from = "2017-12-29",
+                               to = "2022-12-31")
